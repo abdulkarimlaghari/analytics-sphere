@@ -1,23 +1,29 @@
-function countdown() {
-    const launchDate = new Date("February 18, 2025 23:59:59").getTime();
-    const interval = setInterval(() => {
-        const now = new Date().getTime();
-        const timeLeft = launchDate - now;
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("Website Loaded Successfully!");
 
-        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+    // Example: Smooth Scrolling for Navigation Links
+    document.querySelectorAll('nav ul li a').forEach(anchor => {
+        anchor.addEventListener('click', function (event) {
+            event.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
 
-        document.getElementById("days").innerText = days;
-        document.getElementById("hours").innerText = hours;
-        document.getElementById("minutes").innerText = minutes;
-        document.getElementById("seconds").innerText = seconds;
+            if (targetSection) {
+                window.scrollTo({
+                    top: targetSection.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
 
-        if (timeLeft < 0) {
-            clearInterval(interval);
-            document.querySelector(".countdown").innerHTML = "We're Live!";
-        }
-    }, 1000);
-}
-countdown();
+    // Example: Toggle Mobile Menu (For Future Enhancements)
+    const menuToggle = document.createElement("button");
+    menuToggle.innerText = "☰";
+    menuToggle.classList.add("menu-toggle");
+    document.querySelector("header").appendChild(menuToggle);
+
+    menuToggle.addEventListener("click", function () {
+        document.querySelector("nav ul").classList.toggle("active");
+    });
+});
