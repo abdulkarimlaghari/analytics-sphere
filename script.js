@@ -37,19 +37,19 @@ window.addEventListener('load', () => {
 });
 const form = document.querySelector("form");
 
-form.addEventListener("submit", function (e) {
-  e.preventDefault();
+// form.addEventListener("submit", function (e) {
+//   e.preventDefault();
 
-  const name = form.querySelector('input[type="text"]');
-  const email = form.querySelector('input[type="email"]');
-  const message = form.querySelector('textarea');
+//   const name = form.querySelector('input[type="text"]');
+//   const email = form.querySelector('input[type="email"]');
+//   const message = form.querySelector('textarea');
 
-  if (!name.value || !email.value || !message.value) {
-    alert("Please fill in all fields.");
-    return;
-  }
+//   if (!name.value || !email.value || !message.value) {
+//     alert("Please fill in all fields.");
+//     return;
+//   }
 
-  // Simulate success
-  alert("✅ Your message has been sent successfully!");
-  form.reset();
-});
+//   // Simulate success
+//   alert("✅ Your message has been sent successfully!");
+//   form.reset();
+// });
