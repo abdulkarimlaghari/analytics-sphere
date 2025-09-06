@@ -23,11 +23,11 @@ document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
   });
 });
 // Contact form alert
-document.querySelector("form").addEventListener("submit", function (e) {
-  e.preventDefault();
-  alert("Thank you! Your message has been received.");
-  this.reset();
-});
+// document.querySelector("form").addEventListener("submit", function (e) {
+//   e.preventDefault();
+//   alert("Thank you! Your message has been received.");
+//   this.reset();
+// });
 // Fade-in animation for header text
 window.addEventListener('load', () => {
   const headerText = document.querySelector('.header-text');
