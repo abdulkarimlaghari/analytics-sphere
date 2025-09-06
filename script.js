@@ -1,30 +1,55 @@
-// Navigation Smooth Scroll
-document.querySelectorAll('nav a').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href').substring(1);
-        const targetElement = document.getElementById(targetId);
-        if (targetElement) {
-            window.scrollTo({
-                top: targetElement.offsetTop - 70,
-                behavior: 'smooth'
-            });
-        }
-    });
+// Toggle navigation menu on mobile
+const toggle = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+if (toggle && navLinks) {
+  toggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+}
+
+// Smooth scroll for nav links
+document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const targetID = this.getAttribute('href').substring(1);
+    const targetEl = document.getElementById(targetID);
+    if (targetEl) {
+      window.scrollTo({
+        top: targetEl.offsetTop - 60,
+        behavior: 'smooth'
+      });
+    }
+  });
 });
-
-// Contact Form Submission (Mock)
-document.querySelector("form").addEventListener("submit", function (event) {
-    event.preventDefault();
-    alert("Your message has been sent successfully!");
+// Contact form alert
+document.querySelector("form").addEventListener("submit", function (e) {
+  e.preventDefault();
+  alert("Thank you! Your message has been received.");
+  this.reset();
 });
+// Fade-in animation for header text
+window.addEventListener('load', () => {
+  const headerText = document.querySelector('.header-text');
+  if (headerText) {
+    headerText.classList.add('fade-in');
+  }
+});
+const form = document.querySelector("form");
 
-// Example: Toggle Mobile Menu (For Future Enhancements)
-const menuToggle = document.createElement("button");
-menuToggle.innerText = "☰";
-menuToggle.classList.add("menu-toggle");
-document.querySelector("header").appendChild(menuToggle);
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
 
-menuToggle.addEventListener("click", function () {
-    document.querySelector("nav ul").classList.toggle("active");
+  const name = form.querySelector('input[type="text"]');
+  const email = form.querySelector('input[type="email"]');
+  const message = form.querySelector('textarea');
+
+  if (!name.value || !email.value || !message.value) {
+    alert("Please fill in all fields.");
+    return;
+  }
+
+  // Simulate success
+  alert("✅ Your message has been sent successfully!");
+  form.reset();
 });

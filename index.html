@@ -1,115 +1,145 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analytics Sphere Ltd</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Analytics Sphere Ltd</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
+  <!-- Header -->
+  <header>
+    <div class="logo-text">Analytics Sphere Ltd</div>
+    <nav>
+      <button class="menu-toggle">&#9776;</button>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <!-- Header -->
-    <header>
-        <div class="logo-text">ANALYTICS SPHERE LTD</div>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#about">About</a></li>
-                <!-- <li><a href="#testimonials">Testimonials</a></li> -->
-                <li><a href="#blog">Blog</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Turn Data into Decisions</h1>
+    <p>Analytics & Accounting solutions tailored to your business goals.</p>
+    <a href="#services" class="cta-button">Explore Services</a>
+  </section>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <h1>Crunching Numbers, Crafting Insights!</h1>
-        <h2 class="company-name">Analytics Sphere Ltd</h2>
-        <p>Your trusted partner for data-driven solutions and smart accounting insights.</p>
-        <a href="#services" class="cta-button">Discover Our Services</a>
-    </section>
+  <!-- Services Section -->
+  <section class="services" id="services">
+    <h2>Our Services</h2>
+    <div class="service-list">
+      <div class="service-item">
+        <img src="icons/analytics.png" alt="Analytics Icon">
+        <h3>Data Analytics</h3>
+        <p>Advanced analytics to uncover insights and power smarter decisions.</p>
+      </div>
+      <div class="service-item">
+        <img src="icons/accounting.png" alt="Accounting Icon">
+        <h3>Accounting</h3>
+        <p>Streamlined accounting to manage your finances with clarity and control.</p>
+      </div>
+      <div class="service-item">
+        <img src="icons/tax.png" alt="Tax Icon">
+        <h3>Tax Consulting</h3>
+        <p>Effective tax strategies tailored to save you time and money.</p>
+      </div>
+    </div>
+  </section>
+  <!-- About Section -->
+<section class="about" id="about">
+  <div class="about-content">
+    <div class="about-text">
+      <h2>About Us</h2>
+      <p>
+        At Analytics Sphere Ltd, we combine the power of data and finance to deliver
+        insight-driven solutions for modern businesses. Whether you're managing finances
+        or optimizing data pipelines, we’re here to help you grow.
+      </p>
+      <p>
+        Our team of analysts and accountants collaborate closely with clients to bring
+        clarity, strategy, and smart decision-making to every challenge.
+      </p>
+    </div>
+    <div class="about-image">
+      <img src="https://source.unsplash.com/600x400/?data,technology" alt="About Analytics Sphere">
+    </div>
+  </div>
+</section>
+<!-- Testimonials Section -->
+<section class="testimonials" id="testimonials">
+  <h2>What Our Clients Say</h2>
+  <div class="testimonial-list">
+    <div class="testimonial-card">
+      <p>"Analytics Sphere transformed how we use data — incredible insights and service!"</p>
+      <h4>Sarah Thompson</h4>
+      <span>COO, FinEdge Ltd</span>
+    </div>
+    <div class="testimonial-card">
+      <p>"Their accounting and analytics support has been game-changing for our operations."</p>
+      <h4>Michael Rivera</h4>
+      <span>Founder, SmartRetail</span>
+    </div>
+    <div class="testimonial-card">
+      <p>"Highly professional, responsive, and truly data-driven. Great team to work with!"</p>
+      <h4>Priya Desai</h4>
+      <span>CTO, CloudNest</span>
+    </div>
+  </div>
+</section>
+<!-- Blog Section -->
+<section class="blog" id="blog">
+  <h2>From the Blog</h2>
+  <div class="blog-list">
+    <div class="blog-post">
+      <h3>The Power of Analytics in Finance</h3>
+      <p>How businesses use analytics to make smarter financial decisions...</p>
+      <a href="#">Read More</a>
+    </div>
+    <div class="blog-post">
+      <h3>Tax Season Tips for Small Businesses</h3>
+      <p>Essential tax prep strategies that help you avoid penalties...</p>
+      <a href="#">Read More</a>
+    </div>
+    <div class="blog-post">
+      <h3>How to Automate Accounting Tasks</h3>
+      <p>Save time and reduce errors with automation tools built for accountants...</p>
+      <a href="#">Read More</a>
+    </div>
+  </div>
+</section>
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <h2>Contact Us</h2>
+  <p>Let’s talk about how we can help your business grow.</p>
+  <form action="https://formspree.io/f/xdklyajp" method="POST">
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea rows="5" placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
 
-    <section id="services">
-        <h2>Our Services</h2>
-        <div class="service-list">
-            <div class="service-item">
-                <img src="assets/icons/data-analytics.png" alt="Data Analytics">
-                <h3>Data Analytics</h3>
-                <p>Unlock insights with advanced data analytics to drive business decisions.</p>
-            </div>
-            <div class="service-item">
-                <img src="assets/icons/accounting.png" alt="Financial Accounting">
-                <h3>Financial Accounting</h3>
-                <p>Expert accounting solutions tailored for your business growth.</p>
-            </div>
-            <div class="service-item">
-                <img src="assets/icons/tax-consulting.png" alt="Tax Consulting">
-                <h3>Tax Consulting</h3>
-                <p>Optimize your tax strategy with professional advisory services.</p>
-            </div>
-        </div>
-    </section>
 
-
-    <!-- About Us Section -->
-    <section class="about" id="about">
-        <h2>About Us</h2>
-        <p>Analytics Sphere Ltd is a leading firm specializing in data analytics and accounting services. We help
-            businesses make informed decisions through numbers and insights.</p>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="testimonials" id="testimonials">
-        <h2>What Our Clients Say</h2>
-        <div class="testimonial">
-            <p>"Analytics Sphere helped us transform our data into actionable insights!"</p>
-            <strong>- John Doe, CEO of XYZ Corp</strong>
-        </div>
-        <div class="testimonial">
-            <p>"Professional and highly knowledgeable in accounting and analytics!"</p>
-            <strong>- Jane Smith, CFO of ABC Ltd</strong>
-        </div>
-    </section>
-
-    <!-- Blog/Insights Section -->
-    <section class="blog" id="blog">
-        <h2>Latest Insights</h2>
-        <div class="blog-post">
-            <h3>The Future of Data Analytics</h3>
-            <p>Discover how data is shaping businesses in the digital age.</p>
-            <a href="#">Read More</a>
-        </div>
-        <div class="blog-post">
-            <h3>Tax Planning Strategies for 2025</h3>
-            <p>Stay ahead with the best tax planning strategies.</p>
-            <a href="#">Read More</a>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <h2>Contact Us</h2>
-        <p>Email: contact@analyticssphere.com</p>
-        <p>Phone: +123 456 7890</p>
-        <p>Location: London, UK</p>
-    </section>
-
-    <!-- Footer Section -->
-    <footer>
-        <p>&copy; 2025 Analytics Sphere Ltd. All rights reserved.</p>
-        <nav>
-            <ul>
-                <li><a href="#privacy">Privacy Policy</a></li>
-                <li><a href="#terms">Terms of Service</a></li>
-            </ul>
-        </nav>
-    </footer>
-
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
+<!-- Footer -->
+<footer>
+  <div class="footer-content">
+    <p>&copy; 2025 Analytics Sphere Ltd. All rights reserved.</p>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
 
 </html>
