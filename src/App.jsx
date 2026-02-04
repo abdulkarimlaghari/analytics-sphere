@@ -33,17 +33,30 @@ export default function AnalyticsSphere() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setFormStatus('sending');
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  setFormStatus('sending');
+  
+  try {
+    const response = await fetch('https://formspree.io/f/xdklyajp', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
     
-    // Simulate form submission
-    setTimeout(() => {
+    if (response.ok) {
       setFormStatus('success');
       setFormData({ name: '', email: '', message: '' });
       setTimeout(() => setFormStatus(''), 3000);
-    }, 1500);
-  };
+    } else {
+      setFormStatus('error');
+    }
+  } catch (error) {
+    setFormStatus('error');
+  }
+};
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
@@ -114,7 +127,7 @@ export default function AnalyticsSphere() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100" style={{ fontFamily: "'Inter', sans-serif" }}>
+    <div className="min-h-screen bg-slate-900 text-slate-200" style={{ fontFamily: "'Inter', sans-serif" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700&display=swap');
         
@@ -125,35 +138,12 @@ export default function AnalyticsSphere() {
         }
 
         .gradient-text {
-          background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #ec4899 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
+  background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
-        .gradient-border {
-          position: relative;
-          background: linear-gradient(135deg, rgba(96, 165, 250, 0.1), rgba(167, 139, 250, 0.1));
-          border: 1px solid rgba(96, 165, 250, 0.2);
-        }
 
-        .gradient-border::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          border-radius: inherit;
-          padding: 1px;
-          background: linear-gradient(135deg, #60a5fa, #a78bfa, #ec4899);
-          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-          -webkit-mask-composite: xor;
-          mask-composite: exclude;
-          opacity: 0;
-          transition: opacity 0.3s;
-        }
-
-        .gradient-border:hover::before {
-          opacity: 1;
-        }
 
         .animate-float {
           animation: float 6s ease-in-out infinite;
@@ -186,11 +176,11 @@ export default function AnalyticsSphere() {
         .stagger-4 { animation-delay: 0.4s; }
 
         .hero-bg {
-          background: 
-            radial-gradient(circle at 20% 50%, rgba(96, 165, 250, 0.15) 0%, transparent 50%),
-            radial-gradient(circle at 80% 80%, rgba(167, 139, 250, 0.15) 0%, transparent 50%),
-            radial-gradient(circle at 40% 20%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
-        }
+  background:
+    radial-gradient(circle at 20% 50%, rgba(59,130,246,0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(6,182,212,0.12) 0%, transparent 50%);
+}
+
 
         .glass-effect {
           background: rgba(15, 23, 42, 0.6);
@@ -208,14 +198,15 @@ export default function AnalyticsSphere() {
       `}</style>
 
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 glass-effect transition-all duration-300">
+      <nav className="fixed top-0 w-full z-50 bg-slate-900/80 backdrop-blur border-b border-slate-800 transition-all duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center space-x-2">
               <BarChart3 className="w-8 h-8 text-blue-400" />
-              <span className="text-2xl font-bold gradient-text" style={{ fontFamily: "'Playfair Display', serif" }}>
-                Analytics Sphere
-              </span>
+              <span className="text-2xl font-bold text-blue-400" style={{ fontFamily: "'Playfair Display', serif" }}>
+  Analytics Sphere
+</span>
+
             </div>
 
             {/* Desktop Navigation */}
@@ -224,9 +215,10 @@ export default function AnalyticsSphere() {
                 <button
                   key={item}
                   onClick={() => scrollToSection(item)}
-                  className={`text-sm font-medium transition-all duration-300 hover:text-blue-400 ${
-                    activeSection === item ? 'text-blue-400' : 'text-slate-300'
-                  }`}
+                  className={`text-sm font-medium transition-colors hover:text-cyan-400 ${
+  activeSection === item ? 'text-blue-400' : 'text-slate-300'
+}`}
+
                 >
                   {item.charAt(0).toUpperCase() + item.slice(1)}
                 </button>
@@ -236,7 +228,8 @@ export default function AnalyticsSphere() {
             {/* Mobile menu button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden text-slate-300 hover:text-blue-400 transition-colors"
+              className="md:hidden text-slate-300 hover:text-cyan-400 transition-colors"
+
             >
               {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -251,7 +244,8 @@ export default function AnalyticsSphere() {
                 <button
                   key={item}
                   onClick={() => scrollToSection(item)}
-                  className="block w-full text-left text-slate-300 hover:text-blue-400 transition-colors py-2"
+                  className="block w-full text-left text-slate-300 hover:text-cyan-400 transition-colors py-2"
+
                 >
                   {item.charAt(0).toUpperCase() + item.slice(1)}
                 </button>
@@ -276,14 +270,15 @@ export default function AnalyticsSphere() {
           </p>
           <button
             onClick={() => scrollToSection('services')}
-            className="group inline-flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-8 py-4 rounded-full text-white font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-blue-500/50 animate-slide-up stagger-2"
+            className="group inline-flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 px-8 py-4 rounded-full text-white font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-cyan-500/20 animate-slide-up stagger-2"
+
           >
             <span>Explore Services</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
 
-          <div className="mt-16 animate-float">
-            <ChevronDown className="w-8 h-8 mx-auto text-slate-500 animate-pulse" />
+          <div className="mt-16">
+            <ChevronDown className="w-8 h-8 mx-auto text-slate-500" />
           </div>
         </div>
       </section>
@@ -292,9 +287,10 @@ export default function AnalyticsSphere() {
       <section id="services" className="py-24 bg-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-4 gradient-text" style={{ fontFamily: "'Playfair Display', serif" }}>
-              Our Services
-            </h2>
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-white">
+  Our <span className="text-blue-400">Services</span>
+</h2>
+
             <p className="text-xl text-slate-400">Comprehensive solutions for modern businesses</p>
           </div>
 
@@ -302,11 +298,12 @@ export default function AnalyticsSphere() {
             {services.map((service, index) => (
               <div
                 key={index}
-                className={`gradient-border rounded-2xl p-8 transform transition-all duration-500 hover:scale-105 ${
-                  isVisible.services ? 'animate-slide-up' : 'opacity-0'
-                } stagger-${index + 1}`}
+                className={`bg-slate-800 border border-slate-700 rounded-2xl p-8 transition-all duration-300 hover:border-cyan-400 hover:shadow-md ${
+  isVisible.services ? 'animate-slide-up' : 'opacity-0'
+} stagger-${index + 1}`}
+
               >
-                <div className="text-blue-400 mb-4">{service.icon}</div>
+                <div className="text-cyan-400 mb-4">{service.icon}</div>
                 <h3 className="text-2xl font-bold mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>
                   {service.title}
                 </h3>
@@ -314,7 +311,7 @@ export default function AnalyticsSphere() {
                 <ul className="space-y-2">
                   {service.features.map((feature, idx) => (
                     <li key={idx} className="flex items-center text-sm text-slate-300">
-                      <div className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2"></div>
+                      <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full mr-2"></div>
                       {feature}
                     </li>
                   ))}
@@ -330,9 +327,10 @@ export default function AnalyticsSphere() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className={`${isVisible.about ? 'animate-slide-up' : 'opacity-0'}`}>
-              <h2 className="text-4xl sm:text-5xl font-bold mb-6 gradient-text" style={{ fontFamily: "'Playfair Display', serif" }}>
-                About Us
-              </h2>
+              <h2 className="text-4xl sm:text-5xl font-bold mb-6 text-white">
+  About <span className="text-blue-400">Us</span>
+</h2>
+
               <p className="text-lg text-slate-300 mb-6">
                 At Analytics Sphere Ltd, we combine the power of data and finance to deliver
                 insight-driven solutions for modern businesses. Whether you're managing finances
@@ -374,9 +372,10 @@ export default function AnalyticsSphere() {
       <section id="testimonials" className="py-24 bg-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-4 gradient-text" style={{ fontFamily: "'Playfair Display', serif" }}>
-              What Our Clients Say
-            </h2>
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-white">
+  What Our <span className="text-blue-400">Clients</span> Say
+</h2>
+
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -387,7 +386,7 @@ export default function AnalyticsSphere() {
                   isVisible.testimonials ? 'animate-slide-up' : 'opacity-0'
                 } stagger-${index + 1}`}
               >
-                <div className="text-blue-400 text-5xl mb-4">"</div>
+                <div className="text-cyan-400 text-5xl mb-4">"</div>
                 <p className="text-slate-300 mb-6 italic">{testimonial.quote}</p>
                 <div>
                   <div className="font-semibold text-white">{testimonial.author}</div>
@@ -403,9 +402,10 @@ export default function AnalyticsSphere() {
       <section id="blog" className="py-24 bg-slate-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-4 gradient-text" style={{ fontFamily: "'Playfair Display', serif" }}>
-              From the Blog
-            </h2>
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-white">
+  From the <span className="text-blue-400">Blog</span>
+</h2>
+
             <p className="text-xl text-slate-400">Insights and tips from our experts</p>
           </div>
 
@@ -413,7 +413,7 @@ export default function AnalyticsSphere() {
             {blogPosts.map((post, index) => (
               <div
                 key={index}
-                className={`gradient-border rounded-2xl overflow-hidden group cursor-pointer transform transition-all duration-500 hover:scale-105 ${
+                className={`gradient-border rounded-2xl overflow-hidden group cursor-pointer transform transition-all duration-500 hover:-translate-y-1 ${
                   isVisible.blog ? 'animate-slide-up' : 'opacity-0'
                 } stagger-${index + 1}`}
               >
@@ -421,7 +421,7 @@ export default function AnalyticsSphere() {
                   <div className="text-6xl opacity-20">{post.category === 'Analytics' ? '📊' : post.category === 'Tax' ? '📋' : '💼'}</div>
                 </div>
                 <div className="p-6">
-                  <div className="text-xs text-blue-400 mb-2">{post.category} • {post.date}</div>
+                  <div className="text-xs text-cyan-400 mb-2">{post.category} • {post.date}</div>
                   <h3 className="text-xl font-bold mb-3 group-hover:text-blue-400 transition-colors">
                     {post.title}
                   </h3>
@@ -440,9 +440,10 @@ export default function AnalyticsSphere() {
       <section id="contact" className="py-24 bg-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-4 gradient-text" style={{ fontFamily: "'Playfair Display', serif" }}>
-              Contact Us
-            </h2>
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-white">
+  Contact <span className="text-blue-400">Us</span>
+</h2>
+
             <p className="text-xl text-slate-400">Let's talk about how we can help your business grow</p>
           </div>
 
@@ -450,7 +451,7 @@ export default function AnalyticsSphere() {
             <div className={`${isVisible.contact ? 'animate-slide-up' : 'opacity-0'}`}>
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
-                  <Mail className="w-6 h-6 text-blue-400 mt-1" />
+                  <Mail className="w-6 h-6 text-cyan-400 mt-1" />
                   <div>
                     <div className="font-semibold text-white mb-1">Email</div>
                     <a href="mailto:info@analyticssphere.co.uk" className="text-slate-400 hover:text-blue-400 transition-colors">
@@ -459,7 +460,7 @@ export default function AnalyticsSphere() {
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
-                  <Phone className="w-6 h-6 text-blue-400 mt-1" />
+                  <Phone className="w-6 h-6 text-cyan-400 mt-1" />
                   <div>
                     <div className="font-semibold text-white mb-1">Phone</div>
                     <a href="tel:+442012345678" className="text-slate-400 hover:text-blue-400 transition-colors">
@@ -468,7 +469,7 @@ export default function AnalyticsSphere() {
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
-                  <MapPin className="w-6 h-6 text-blue-400 mt-1" />
+                  <MapPin className="w-6 h-6 text-cyan-400 mt-1" />
                   <div>
                     <div className="font-semibold text-white mb-1">Office</div>
                     <p className="text-slate-400">
@@ -515,7 +516,8 @@ export default function AnalyticsSphere() {
                 <button
                   type="submit"
                   disabled={formStatus === 'sending'}
-                  className="w-full group inline-flex items-center justify-center space-x-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-8 py-4 rounded-xl text-white font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-blue-500/50 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full group inline-flex items-center justify-center space-x-2 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 px-8 py-4 rounded-xl text-white font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-cyan-500/20 disabled:opacity-50 disabled:cursor-not-allowed"
+
                 >
                   <span>{formStatus === 'sending' ? 'Sending...' : formStatus === 'success' ? 'Message Sent!' : 'Send Message'}</span>
                   <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -548,7 +550,7 @@ export default function AnalyticsSphere() {
               ))}
             </div>
             <div className="text-slate-400 text-sm">
-              © 2025 Analytics Sphere Ltd. All rights reserved.
+              © 2026 Analytics Sphere Ltd. All rights reserved.
             </div>
           </div>
         </div>
